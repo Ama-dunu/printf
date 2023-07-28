@@ -1,11 +1,10 @@
 #include "main.h"
 
 /**
- * get_size - Calculates the size to cast the argument task
- * @format: Formatted string in which to print the arguments
- * @i: List of arguments to be printed.
- *
- * Return: Precision.
+ * get_size - Calculates all the size that would cast the argument task
+ * @format: Format string in which is to print the arguments
+ * @i: List of arguments to be printed
+ * Return: Precision
  */
 int get_size(const char *format, int *i)
 {
