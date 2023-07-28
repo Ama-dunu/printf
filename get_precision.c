@@ -2,10 +2,10 @@
 
 /**
  * get_precision - Calculates the precision for printing task
- * @format: Formatted string in which to print the arguments
- * @i: List of arguments to be printed.
- * @list: list of arguments.
- *
+ * @format: Formatted string to print the arguments on this task
+ * @i for  List of arguments to be printed.
+ * @: list of arguments.
+ * done by partners
  * Return: Precision.
  */
 int get_precision(const char *format, int *i, va_list list)
