@@ -3,23 +3,23 @@
 #include "main.h"
 
 /**
- * main - Entry point
- *
- * Return: Always 0
+ * main - Entry point for the finction
+ * done on 27-07-23, by partners
+ * Return: Always (0)
  */
 int main(void)
 {
     int len;
-    int len2;
+    int len22;
     unsigned int ui;
     void *addr;
 
     len = _printf("Let's try to printf a simple sentence.\n");
-    len2 = printf("Let's try to printf a simple sentence.\n");
+    len22 = printf("Let's try to printf a simple sentence.\n");
     ui = (unsigned int)INT_MAX + 1024;
     addr = (void *)0x7ffe637541f0;
     _printf("Length:[%d, %i]\n", len, len);
-    printf("Length:[%d, %i]\n", len2, len2);
+    printf("Length:[%d, %i]\n", len22, len22);
     _printf("Negative:[%d]\n", -762534);
     printf("Negative:[%d]\n", -762534);
     _printf("Unsigned:[%u]\n", ui);
@@ -35,9 +35,9 @@ int main(void)
     _printf("Address:[%p]\n", addr);
     printf("Address:[%p]\n", addr);
     len = _printf("Percent:[%%]\n");
-    len2 = printf("Percent:[%%]\n");
+    len22 = printf("Percent:[%%]\n");
     _printf("Len:[%d]\n", len);
-    printf("Len:[%d]\n", len2);
+    printf("Len:[%d]\n", len22);
     _printf("Unknown:[%r]\n");
     printf("Unknown:[%r]\n");
     return (0);
