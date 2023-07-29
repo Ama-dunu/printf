@@ -5,20 +5,20 @@
  * print_pointer - Prints the value of a pointer variable.
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
  * Return: Number of characters printed.
  */
-int print_pointer(va_list types, char buffer[],
+int print_pointer(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	char extra_c = 0, padd = ' ';
-	int ind = BUFF_SIZE - 2, length = 2; /* length=2 for '0x' */
+	int ind = BUFF_SIZE - 2, length = 2,padd_start = 1; /* length=2 for '0x' */
 	unsigned long num_addrs;
 	char map_to[] = "0123456789abcdef";
-	void *addrs = va_arg(types, void *);
+	void *addrs = va_arg(args, void *);
 
 	UNUSED(width);
 	UNUSED(size);
@@ -47,25 +47,26 @@ int print_pointer(va_list types, char buffer[],
 
 	ind++;
 
-	return (write_pointer(buffer, ind, length, width, flags, padd, extra_c));
+	return (write_pointer(buffer, ind, length, 
+				width, flags, padd, extra_c, padd_start));
 }
 
 /************************* PRINT NON PRINTABLE *************************/
 /**
- * print_non_printable - Prints ASCII codes in hexadecimal of non-printable characters
+ * print_non_printable - Prints ASCII codes in hexadecimal of non-printable chars
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
  * Return: Number of characters printed.
  */
-int print_non_printable(va_list types, char buffer[],
+int print_non_printable(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	int i = 0, offset = 0;
-	char *str = va_arg(types, char *);
+	char *str = va_arg(args, char *);
 
 	UNUSED(flags);
 	UNUSED(width);
@@ -77,7 +78,7 @@ int print_non_printable(va_list types, char buffer[],
 
 	while (str[i] != '\0')
 	{
-		if (is_pritable(str[i]))
+		if (is_printable(str[i]))
 			buffer[i + offset] = str[i];
 		else
 			offset += append_hexa_code(str[i], buffer, i + offset);
@@ -95,13 +96,13 @@ int print_non_printable(va_list types, char buffer[],
  * print_reverse - Prints a string in reverse.
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
  * Return: Number of characters printed.
  */
-int print_reverse(va_list types, char buffer[],
+int print_reverse(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	char *str;
@@ -112,7 +113,7 @@ int print_reverse(va_list types, char buffer[],
 	UNUSED(width);
 	UNUSED(size);
 
-	str = va_arg(types, char *);
+	str = va_arg(args, char *);
 
 	if (str == NULL)
 	{
@@ -136,16 +137,16 @@ int print_reverse(va_list types, char buffer[],
 
 /************************* PRINT A STRING IN ROT13 *************************/
 /**
- * print_rot13string - Prints a string in ROT13 encoding.
+ * print_rot13string - Prints a string in ROT13.
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
  * Return: Number of characters printed.
  */
-int print_rot13string(va_list types, char buffer[],
+int print_rot13string(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	char x;
@@ -155,7 +156,7 @@ int print_rot13string(va_list types, char buffer[],
 	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	str = va_arg(types, char *);
+	str = va_arg(args, char *);
 
 	UNUSED(buffer);
 	UNUSED(flags);

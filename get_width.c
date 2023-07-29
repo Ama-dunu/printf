@@ -1,42 +1,36 @@
 #include "main.h"
 
 /**
- * get_width - Calculate the width for printing.
- * @format: The formatted string in which to find the width.
- * @i: The index from which to start analyzing the format string.
- * @list: The va_list of arguments.
- * Return: The width value.
+ * get_width - Calculates the width for printing
+ * @format: Formatted string in which to print the arguments.
+ * @index: Pointer to the index of the current character in the format string.
+ * @args: List of arguments to be printed.
+ *
+ * Return: Width.
  */
-int get_width(const char *format, int *i, va_list list)
+int get_width(const char *format, int *index, va_list args)
 {
-	int curr_i;
+	int current_index = *index + 1;
 	int width = 0;
 
-	/* Loop through the characters to find the width */
-	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
+	for (; format[current_index] != '\0'; current_index++)
 	{
-		/* If the character is a digit, update the width accordingly */
-		if (is_digit(format[curr_i]))
+		if (is_digit(format[current_index]))
 		{
 			width *= 10;
-			width += format[curr_i] - '0';
+			width += format[current_index] - '0';
 		}
-		/* If the character is '*', get the width from the va_list of arguments */
-		else if (format[curr_i] == '*')
+		else if (format[current_index] == '*')
 		{
-			curr_i++;
-			width = va_arg(list, int);
+			current_index++;
+			width = va_arg(args, int);
 			break;
 		}
-		/* If the character is not a digit or '*', stop analyzing the width */
 		else
-		{
 			break;
-		}
 	}
 
-	/* Update the index 'i' to the last character that was analyzed */
-	*i = curr_i - 1;
+	*index = current_index - 1;
 
 	return (width);
 }

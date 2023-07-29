@@ -5,17 +5,18 @@
  * print_unsigned - Prints an unsigned number.
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
+ * @author: Ama Dunu
  * Return: Number of characters printed.
  */
-int print_unsigned(va_list types, char buffer[],
+int print_unsigned(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	int i = BUFF_SIZE - 2;
-	unsigned long int num = va_arg(types, unsigned long int);
+	unsigned long int num = va_arg(args, unsigned long int);
 
 	num = convert_size_unsgnd(num, size);
 
@@ -40,17 +41,18 @@ int print_unsigned(va_list types, char buffer[],
  * print_octal - Prints an unsigned number in octal notation.
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
+ * @author: Ama Dunu
  * Return: Number of characters printed.
  */
-int print_octal(va_list types, char buffer[],
+int print_octal(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	int i = BUFF_SIZE - 2;
-	unsigned long int num = va_arg(types, unsigned long int);
+	unsigned long int num = va_arg(args, unsigned long int);
 	unsigned long int init_num = num;
 
 	UNUSED(width);
@@ -81,16 +83,16 @@ int print_octal(va_list types, char buffer[],
  * print_hexadecimal - Prints an unsigned number in hexadecimal notation.
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
  * Return: Number of characters printed.
  */
-int print_hexadecimal(va_list types, char buffer[],
+int print_hexadecimal(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
-	return (print_hexa(types, "0123456789abcdef", buffer,
+	return (print_hexa(args, "0123456789abcdef", buffer,
 				flags, 'x', width, precision, size));
 }
 
@@ -99,16 +101,17 @@ int print_hexadecimal(va_list types, char buffer[],
  * print_hexa_upper - Prints an unsigned number in upper hexadecimal notation.
  * @types: List of arguments.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @map_to: Array of values to map the number to.
+ * @flags: Active flags.
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
  * Return: Number of characters printed.
  */
-int print_hexa_upper(va_list types, char buffer[],
+int print_hexa_upper(va_list args, char buffer[],
 		int flags, int width, int precision, int size)
 {
-	return (print_hexa(types, "0123456789ABCDEF", buffer,
+	return (print_hexa(args, "0123456789ABCDEF", buffer,
 				flags, 'X', width, precision, size));
 }
 
@@ -118,18 +121,18 @@ int print_hexa_upper(va_list types, char buffer[],
  * @types: List of arguments.
  * @map_to: Array of values to map the number to.
  * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags.
- * @flag_ch: Character for the flag (x or X).
- * @width: Width specifier.
- * @precision: Precision specifier.
+ * @flags: Active flags.
+ * @flag_ch: Character for the flag (e.g., 'x' or 'X').
+ * @width: Width.
+ * @precision: Precision specification.
  * @size: Size specifier.
  * Return: Number of characters printed.
  */
-int print_hexa(va_list types, char map_to[], char buffer[],
+int print_hexa(va_list args, char map_to[], char buffer[],
 		int flags, char flag_ch, int width, int precision, int size)
 {
 	int i = BUFF_SIZE - 2;
-	unsigned long int num = va_arg(types, unsigned long int);
+	unsigned long int num = va_arg(args, unsigned long int);
 	unsigned long int init_num = num;
 
 	UNUSED(width);

@@ -2,26 +2,24 @@
 
 /**
  * get_size - Calculate the size to cast the argument.
- * @format: The formatted string in which to find the size.
- * @i: The index from which to start analyzing the format string.
- * Return: The size to be used for casting the argument.
+ * @format: Formatted string in which to print the arguments.
+ * @index:  Pointer to the index of the current character in the format string.
+ * Return: size specifier.
  */
-int get_size(const char *format, int *i)
+int get_size(const char *format, int *index)
 {
-	int curr_i = *i + 1;
+	int current_index = *index + 1;
 	int size = 0;
 
-	/* Check if the current character indicates a size specifier */
-	if (format[curr_i] == 'l')
+	if (format[current_index] == 'l')
 		size = S_LONG;
-	else if (format[curr_i] == 'h')
+	else if (format[current_index] == 'h')
 		size = S_SHORT;
 
-	/* If size is not found, update the index 'i' to the last character that was analyzed */
 	if (size == 0)
-		*i = curr_i - 1;
+		*index = current_index - 1;
 	else
-		*i = curr_i;
+		*index = current_index;
 
 	return (size);
 }

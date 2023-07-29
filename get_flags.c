@@ -1,41 +1,42 @@
 #include "main.h"
 
 /**
- * get_flags - Calculate active flags from the format string.
- * @format: The formatted string in which to find the flags.
- * @i: The index from which to start analyzing the format string.
- * Return: The combined flags as an integer.
+ * get_flags - Calculate active flags.
+ * @format: Formatted string in which to print the arguments.
+ * @index: Pointer to the index of the current character in the format string.
+ * Return: Flags.
  */
-int get_flags(const char *format, int *i)
+int get_flags(const char *format, int *index)
 {
-	/* Flags characters: - + 0 # ' ' */
-	const char FLAGS_CH[] = {'-', '+', '0', '#', ' ', '\0'};
-	/* Corresponding flags values: F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0 */
-	const int FLAGS_ARR[] = {F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0};
+	/* - + 0 # ' ' */
+	/* 1 2 4 8  16 */
 
-	int j, curr_i;
+	int j, current_index;
+
 	int flags = 0;
 
-	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
+	const char FLAGS_CHARS[] = {'-', '+', '0', '#', ' ', '\0'};
+
+	const int FLAGS_VALUES[] = {F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0};
+
+	for (current_index = *index + 1; format[current_index] != '\0'; current_index++)
 	{
-		/* Check if the current character is one of the flags characters */
-		for (j = 0; FLAGS_CH[j] != '\0'; j++)
+		for (j = 0; FLAGS_CHARS[j] != '\0'; j++)
 		{
-			if (format[curr_i] == FLAGS_CH[j])
+			if (format[current_index] == FLAGS_CHARS[j])
 			{
-				/* If found, combine the corresponding flag to the 'flags' integer */
-				flags |= FLAGS_ARR[j];
+				flags |= FLAGS_VALUES[j];
+
 				break;
 			}
 		}
 
-		/* If the current character is not one of the flags characters, exit the loop */
-		if (FLAGS_CH[j] == '\0')
+		if (FLAGS_CHARS[j] == '\0')
+
 			break;
 	}
 
-	/* Update the index 'i' to the last character that was analyzed */
-	*i = curr_i - 1;
+	*index = current_index - 1;
 
 	return (flags);
 }
